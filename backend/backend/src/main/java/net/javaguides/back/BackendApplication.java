@@ -1,4 +1,4 @@
-package com.netguides.backend;
+package net.javaguides.back;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

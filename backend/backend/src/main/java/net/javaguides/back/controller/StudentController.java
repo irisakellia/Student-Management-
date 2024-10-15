@@ -28,4 +28,10 @@ public class StudentController {
         StudentDto studentDto = studentService.getStudentById(studentId);
         return ResponseEntity.ok(studentDto);
     }
+
+    @GetMapping
+    public ResponseEntity<List<StudentDto>> getAllStudents(){
+        List<StudentDto> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
+    }
 }

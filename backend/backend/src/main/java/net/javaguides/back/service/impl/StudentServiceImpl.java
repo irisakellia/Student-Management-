@@ -9,6 +9,9 @@ import net.javaguides.back.repository.StudentRepository;
 import net.javaguides.back.service.StudentService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class StudentServiceImpl extends StudentService {
@@ -27,6 +30,13 @@ public class StudentServiceImpl extends StudentService {
                         new ResourceNotFoundException("student does not exist in the db "+ studentId));
 
         return StudentMapper.mapToStudentDto(student);
+    }
+
+    @Override
+    public List<StudentDto> getAllStudents() {
+        List<Student> students = studentRepository.findAll();
+        return students.stream().map((student) -> StudentMapper.mapToStudentDto(student))
+                .collect(Collectors.toList());
     }
 
 }

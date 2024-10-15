@@ -10,14 +10,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class StudentServiceImpl implements StudentService {
-
-    private final StudentRepository studentRepository;
-
+public class StudentServiceImpl extends StudentService {
+    private StudentRepository studentRepository ;
     @Override
-    public StudentDto createStudent(StudentDto studentDto) {
+    public StudentDto createStudent(StudentDto studentDto){
         Student student = StudentMapper.mapToStudent(studentDto);
         Student savedStudent = studentRepository.save(student);
         return StudentMapper.mapToStudentDto(savedStudent);
     }
+
+    @Override
+    public StudentDto getStudentById(long studentId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(()->
+                        )
+    }
+
 }

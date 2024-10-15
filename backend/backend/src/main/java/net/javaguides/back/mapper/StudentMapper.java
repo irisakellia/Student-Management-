@@ -2,7 +2,9 @@ package net.javaguides.back.mapper;
 
 import net.javaguides.back.dto.StudentDto;
 import net.javaguides.back.entity.Student;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentMapper {
 
     public static StudentDto mapToStudentDto(Student student){
@@ -11,8 +13,8 @@ public class StudentMapper {
                 student.getPhotourl(),
                 student.getFirstName(),
                 student.getLastName(),
-                student.getGender(),
-                student.getEmail()
+                student.getEmail(),
+                student.getGender()
         );
     }
 
@@ -22,8 +24,8 @@ public class StudentMapper {
                 studentDto.getPhotourl(),
                 studentDto.getFirstName(),
                 studentDto.getLastName(),
-                studentDto.getGender(),
-                studentDto.getEmail()
+                studentDto.getEmail(),
+                studentDto.getGender()
 
                 );
     }

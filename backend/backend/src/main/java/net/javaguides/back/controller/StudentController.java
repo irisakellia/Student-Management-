@@ -18,7 +18,7 @@ public class StudentController {
 
     private StudentService studentService ;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto studentDto){
         StudentDto savedStudent =  studentService.createStudent(studentDto);
         return new ResponseEntity<>(savedStudent , HttpStatus.CREATED);

@@ -5,26 +5,25 @@ import net.javaguides.back.entity.Student;
 
 public class StudentMapper {
 
-    public static StudentDto mapToStudentDto(Student student){
-        return  new StudentDto(
+    public static StudentDto mapToStudentDto(Student student) {
+        return new StudentDto(
                 student.getId(),
                 student.getPhotourl(),
                 student.getFirstName(),
                 student.getLastName(),
-                student.getGender(),
-                student.getEmail()
+                student.getEmail(), // Corrected mapping order
+                student.getGender()
         );
     }
 
-    public static Student mapToStudent(StudentDto studentDto){
+    public static Student mapToStudent(StudentDto studentDto) {
         return new Student(
                 studentDto.getId(),
                 studentDto.getPhotourl(),
                 studentDto.getFirstName(),
                 studentDto.getLastName(),
-                studentDto.getGender(),
-                studentDto.getEmail()
-
-                );
+                studentDto.getEmail(), // Corrected mapping order
+                studentDto.getGender()
+        );
     }
 }

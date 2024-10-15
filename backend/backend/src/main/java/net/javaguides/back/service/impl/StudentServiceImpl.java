@@ -3,6 +3,7 @@ package net.javaguides.back.service.impl;
 import lombok.AllArgsConstructor;
 import net.javaguides.back.dto.StudentDto;
 import net.javaguides.back.entity.Student;
+import net.javaguides.back.exception.ResourceNotFoundException;
 import net.javaguides.back.mapper.StudentMapper;
 import net.javaguides.back.repository.StudentRepository;
 import net.javaguides.back.service.StudentService;
@@ -23,7 +24,9 @@ public class StudentServiceImpl extends StudentService {
     public StudentDto getStudentById(long studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(()->
-                        )
+                        new ResourceNotFoundException("student does not exist in the db "+ studentId));
+
+        return StudentMapper.mapToStudentDto(student);
     }
 
 }

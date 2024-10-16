@@ -17,7 +17,7 @@ const ListStudentComponent = () => {
   }, []);
 
   function addNewStudent(){
-    navigate('/')
+    navigate('/add-student')
 
   }
 

@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createStudent } from '../service/StudentService';
 
 const StudentComponent = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const [photourl , setphotourl] = useState('');
-const [firstName , setFirstName] = useState('');
-const [lastName, setLastName] = useState('');
-const [email , setEmail] = useState('');
-const [gender, setGender] = useState('');
+  const [photourl, setPhotourl] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
 
-function saveStudent(e){
+  function saveStudent(e) {
     e.preventDefault();
 
-    createStudent(student).then((response)=>{
-        console.log(response.data);
-        navigate('/student');
-    })
-}
+     const student = { photourl, firstName, lastName, email, gender };
 
+     console.log(student)
+
+    createStudent(student).then((response) => {
+      console.log(response.data);
+      navigate('/student'); 
+    });
+  }
 
   return (
     <div className="p-6">
@@ -30,7 +34,7 @@ function saveStudent(e){
             type="text"
             name="photourl"
             value={photourl}
-            onChange={(e) => setphotourl(e.target.value)}
+            onChange={(e) => setPhotourl(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter photo URL"
             required
@@ -42,7 +46,7 @@ function saveStudent(e){
             type="text"
             name="firstName"
             value={firstName}
-            onChange={(e).setFirstName(target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter first name"
             required
@@ -54,7 +58,7 @@ function saveStudent(e){
             type="text"
             name="lastName"
             value={lastName}
-            onChange={(e).setLastName(target.value)}
+            onChange={(e) => setLastName(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter last name"
             required
@@ -66,7 +70,7 @@ function saveStudent(e){
             type="email"
             name="email"
             value={email}
-            onChange={(e).setEmail(target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter email"
             required
@@ -77,7 +81,7 @@ function saveStudent(e){
           <select
             name="gender"
             value={gender}
-            onChange={(e).setGender(target.value)}
+            onChange={(e) => setGender(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             required
           >
@@ -90,7 +94,8 @@ function saveStudent(e){
         <div>
           <button
             type="submit"
-            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700" onClick={saveStudent}
+            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700"
+            onClick={saveStudent}
           >
             Submit
           </button>

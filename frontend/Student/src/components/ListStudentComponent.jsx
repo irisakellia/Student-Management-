@@ -30,11 +30,11 @@ const ListStudentComponent = () => {
           {students.map((student) => (
             <tr key={student.id}>
               <td>
-                <img src={student.photo_url} alt={`${student.firstName} ${student.lastName}`} width="50" height="50" />
+                <img src={student.photourl} alt={`${student.firstName} ${student.lastName}`} width="150" height="150" className='rounded-full' />
               </td>
               <td>{student.firstName}</td>
               <td>{student.lastName}</td>
-              <td>{student.email}</td> {/* Corrected to "email" */}
+              <td>{student.email}</td> 
               <td>{student.gender}</td>
             </tr>
           ))}

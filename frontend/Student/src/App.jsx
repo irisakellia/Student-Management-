@@ -14,8 +14,8 @@ function App() {
     <HeaderComponent/>
     <Routes>
       
-      
-      <Route path='/' element={<StudentComponent/>}></Route>
+      <Route path='/student' element={<ListStudentComponent/>}></Route>
+      <Route path='/add-student' element={<StudentComponent/>}></Route>
     
       </Routes>
       </BrowserRouter>

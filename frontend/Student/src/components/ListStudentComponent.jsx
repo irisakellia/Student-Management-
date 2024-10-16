@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { listStudents } from '../service/StudentService';
+import {useNavigate} from 'react-router-dom'
 
 const ListStudentComponent = () => {
   const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     listStudents()
@@ -13,6 +15,11 @@ const ListStudentComponent = () => {
         console.error(error);
       });
   }, []);
+
+  function addNewStudent(){
+    navigate('/')
+
+  }
 
   return (
     <div className="p-6 mt-20">
@@ -43,9 +50,12 @@ const ListStudentComponent = () => {
               <td className="py-3 px-6">{student.email}</td>
               <td className="py-3 px-6">{student.gender}</td>
             </tr>
+
+
           ))}
         </tbody>
       </table>
+      <button className='border border-blue-950 bg-blue-950 p-2 py-2 text-white font-medium mt-2 rounded-md' onClick={addNewStudent}>Add Student</button>
     </div>
   );
 };

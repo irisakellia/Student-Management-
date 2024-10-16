@@ -31,6 +31,7 @@ const ListStudentComponent = () => {
             <th className="py-3 px-6">Last Name</th>
             <th className="py-3 px-6">Email</th>
             <th className="py-3 px-6">Gender</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +50,10 @@ const ListStudentComponent = () => {
               <td className="py-3 px-6">{student.lastName}</td>
               <td className="py-3 px-6">{student.email}</td>
               <td className="py-3 px-6">{student.gender}</td>
+              <td>
+                <button className='border border-blue-950 bg-blue-950 p-2 py-2 rounded-md text-white'>Update</button>
+                <button className='border border-blue-950 bg-blue-950 p-2 py-2 rounded-md text-white ml-4'>Delete</button>
+              </td>
             </tr>
 
 

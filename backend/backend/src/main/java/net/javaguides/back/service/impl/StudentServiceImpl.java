@@ -39,4 +39,9 @@ public class StudentServiceImpl extends StudentService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public StudentDto updateStudent(StudentDto studentDto) {
+        return null;
+    }
+
 }

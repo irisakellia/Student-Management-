@@ -8,4 +8,5 @@ public abstract class StudentService {
     public abstract StudentDto createStudent(StudentDto studentDto);
     public abstract StudentDto getStudentById(long studentId);
     public abstract List<StudentDto> getAllStudents();
+    public abstract StudentDto updateStudent(Long studentId, StudentDto updatedStudent);
 }

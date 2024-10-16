@@ -120,7 +120,7 @@ const StudentComponent = () => {
             required
           />
           {errors.firstName && (
-            <div className='text-red text-sm mt-2'>{errors.firstName} </div>
+            <div className='text-red-500 text-sm mt-2'>{errors.firstName} </div>
           )
           
         }

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StudentComponent = () => {
-  const [student, setStudent] = useState({
-    photourl: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    gender: ''
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setStudent((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+    const navigate = useNavigate();
+
+const [photourl , setphotourl] = useState('');
+const [firstName , setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const [email , setEmail] = useState('');
+const [gender, setGender] = useState('');
+
+function saveStudent(e){
+    e.preventDefault();
+
+    createStudent(student).then((response)=>{
+        console.log(response.data);
+        navigate('/student');
+    })
+}
+
 
   return (
     <div className="p-6">
@@ -25,8 +29,8 @@ const StudentComponent = () => {
           <input
             type="text"
             name="photourl"
-            value={student.photourl}
-            onChange={handleChange}
+            value={photourl}
+            onChange={(e) => setphotourl(e.target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter photo URL"
             required
@@ -37,8 +41,8 @@ const StudentComponent = () => {
           <input
             type="text"
             name="firstName"
-            value={student.firstName}
-            onChange={handleChange}
+            value={firstName}
+            onChange={(e).setFirstName(target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter first name"
             required
@@ -49,8 +53,8 @@ const StudentComponent = () => {
           <input
             type="text"
             name="lastName"
-            value={student.lastName}
-            onChange={handleChange}
+            value={lastName}
+            onChange={(e).setLastName(target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter last name"
             required
@@ -61,8 +65,8 @@ const StudentComponent = () => {
           <input
             type="email"
             name="email"
-            value={student.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e).setEmail(target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter email"
             required
@@ -72,8 +76,8 @@ const StudentComponent = () => {
           <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
           <select
             name="gender"
-            value={student.gender}
-            onChange={handleChange}
+            value={gender}
+            onChange={(e).setGender(target.value)}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
             required
           >
@@ -86,7 +90,7 @@ const StudentComponent = () => {
         <div>
           <button
             type="submit"
-            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700"
+            className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700" onClick={saveStudent}
           >
             Submit
           </button>

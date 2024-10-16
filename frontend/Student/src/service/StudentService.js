@@ -10,9 +10,10 @@ export const createStudent = (student) =>{
     return axios.post(REST_API_BASE_URL, student) ;
 }
 
-export const getStudent = (studentId)=>{
-    return axios.get(REST_API_BASE_URL + '/' + studentId)
-}
+export const getStudentById = (studentId) => {
+    return axios.get(`${REST_API_BASE_URL}/${studentId}`);
+};
+
 
 export const updateStudent = (studentId, student)=>{
     return axios.put(REST_API_BASE_URL+ '/'+ studentId, student);

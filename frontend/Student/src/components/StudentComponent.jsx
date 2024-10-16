@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createStudent, updateStudent } from '../service/StudentService';
+import { createStudent, updateStudent, getStudentById } from '../service/StudentService';
 
 const StudentComponent = () => {
 
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); 
 
   const [photourl, setPhotourl] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -21,11 +21,27 @@ const StudentComponent = () => {
     gender: '',
   });
 
+
+  useEffect(() => {
+    if (id) {
+      getStudentById(id).then((response) => {
+        const student = response.data;
+        setPhotourl(student.photourl);
+        setFirstName(student.firstName);
+        setLastName(student.lastName);
+        setEmail(student.email);
+        setGender(student.gender);
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  }, [id]);
+
+
   function validateForm() {
     let valid = true;
     const errorsCopy = { ...errors };
 
-    // Validate Photo URL
     if (photourl.trim()) {
       errorsCopy.photourl = '';
     } else {
@@ -33,7 +49,6 @@ const StudentComponent = () => {
       valid = false;
     }
 
-    // Validate First Name
     if (firstName.trim()) {
       errorsCopy.firstName = '';
     } else {
@@ -41,7 +56,6 @@ const StudentComponent = () => {
       valid = false;
     }
 
-    // Validate Last Name
     if (lastName.trim()) {
       errorsCopy.lastName = '';
     } else {
@@ -49,7 +63,6 @@ const StudentComponent = () => {
       valid = false;
     }
 
-    // Validate Email
     if (email.trim()) {
       errorsCopy.email = '';
     } else {
@@ -57,7 +70,6 @@ const StudentComponent = () => {
       valid = false;
     }
 
-    // Validate Gender
     if (gender.trim()) {
       errorsCopy.gender = '';
     } else {
@@ -69,6 +81,7 @@ const StudentComponent = () => {
     return valid;
   }
 
+
   function saveOrUpdateStudent(e) {
     e.preventDefault();
 
@@ -76,7 +89,7 @@ const StudentComponent = () => {
       const student = { photourl, firstName, lastName, email, gender };
 
       if (id) {
-        // Update student
+        
         updateStudent(id, student).then((response) => {
           console.log(response.data);
           navigate('/student');
@@ -84,7 +97,7 @@ const StudentComponent = () => {
           console.error(error);
         });
       } else {
-        // Create student
+        
         createStudent(student).then((response) => {
           console.log(response.data);
           navigate('/student');
@@ -95,6 +108,7 @@ const StudentComponent = () => {
     }
   }
 
+  
   function pageTitle() {
     if (id) {
       return <h2 className='text-xl font-bold'><span className='text-blue-950'>Update</span> Student</h2>;
@@ -108,6 +122,7 @@ const StudentComponent = () => {
       {pageTitle()}
 
       <form className="bg-gray-100 p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+        
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Photo URL</label>
           <input
@@ -124,6 +139,7 @@ const StudentComponent = () => {
           )}
         </div>
 
+        
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">First Name</label>
           <input
@@ -140,6 +156,7 @@ const StudentComponent = () => {
           )}
         </div>
 
+        
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
           <input
@@ -156,6 +173,7 @@ const StudentComponent = () => {
           )}
         </div>
 
+        
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
           <input
@@ -172,6 +190,7 @@ const StudentComponent = () => {
           )}
         </div>
 
+        
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
           <select
@@ -191,6 +210,7 @@ const StudentComponent = () => {
           )}
         </div>
 
+       
         <div>
           <button
             type="submit"
@@ -200,7 +220,6 @@ const StudentComponent = () => {
             Submit
           </button>
         </div>
-
       </form>
     </div>
   );

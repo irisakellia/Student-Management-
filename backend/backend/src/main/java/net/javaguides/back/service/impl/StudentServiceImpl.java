@@ -40,8 +40,33 @@ public class StudentServiceImpl extends StudentService {
     }
 
     @Override
-    public StudentDto updateStudent(StudentDto studentDto) {
-        return null;
+    public StudentDto updateStudent(Long studentId, StudentDto updatedStudent) {
+        Student student = studentRepository.findById(studentId).orElseThrow(
+                ()-> new ResourceNotFoundException("student not found "+ studentId)
+
+        );
+
+        student.setPhotourl(updatedStudent.getPhotourl());
+        student.setFirstName(updatedStudent.getFirstName());
+        student.setLastName(updatedStudent.getLastName());
+        student.setEmail(updatedStudent.getEmail());
+        student.setGender(updatedStudent.getGender());
+
+        Student updatedStudentObj = studentRepository.save(student);
+
+        return StudentMapper.mapToStudentDto(updatedStudentObj);
+
+
     }
+
+    @Override
+    public void deleteStudent(Long studentId) {
+        studentRepository.findById(studentId).orElseThrow(
+                ()-> new ResourceNotFoundException("student not found "+ studentId)
+
+        );
+        studentRepository.deleteById(studentId);
+    }
+
 
 }

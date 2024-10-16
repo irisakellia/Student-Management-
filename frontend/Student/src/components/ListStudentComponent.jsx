@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listStudents } from '../service/StudentService';
+import { deleteStudent, listStudents } from '../service/StudentService';
 import {useNavigate} from 'react-router-dom'
 
 const ListStudentComponent = () => {
@@ -7,18 +7,38 @@ const ListStudentComponent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    listStudents()
-      .then((response) => {
-        setStudents(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  
+    getAllStudents();
   }, []);
+
+  function getAllStudents(){
+    listStudents()
+    .then((response) => {
+      setStudents(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
 
   function addNewStudent(){
     navigate('/add-student')
 
+  }
+
+  function updateStudent(id){
+    navigate(`/edit-student/${id}`)
+  }
+
+  function removeStudent(id){
+    console.log(id);
+
+    deleteStudent(id).then((response)=>{
+
+      getAllStudents();
+    }).catch(error=>{
+      console.error(error);
+    })
   }
 
   return (
@@ -51,8 +71,8 @@ const ListStudentComponent = () => {
               <td className="py-3 px-6">{student.email}</td>
               <td className="py-3 px-6">{student.gender}</td>
               <td>
-                <button className='border border-blue-950 bg-blue-950 p-2 py-2 rounded-md text-white'>Update</button>
-                <button className='border border-blue-950 bg-blue-950 p-2 py-2 rounded-md text-white ml-4'>Delete</button>
+                <button className='border border-blue-950 bg-blue-950 p-2 py-2 rounded-md text-white' onClick={()=> updateStudent(student.id)}>Update</button>
+                <button className='border border-blue-950 bg-blue-950 p-2 py-2 rounded-md text-white ml-4' onClick={()=> removeStudent(student.id)}>Delete</button>
               </td>
             </tr>
 

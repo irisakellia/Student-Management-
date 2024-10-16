@@ -16,6 +16,7 @@ function App() {
       
       <Route path='/student' element={<ListStudentComponent/>}></Route>
       <Route path='/add-student' element={<StudentComponent/>}></Route>
+      <Route path='/edit-student' element={<StudentComponent/>}></Route>
     
       </Routes>
       </BrowserRouter>

@@ -6,6 +6,6 @@ export const listStudents = ()=>{
     return axios.get(REST_API_BASE_URL);
 }
 
-export const createStudent = ()=>{
+export const createStudent = (student) =>{
     return axios.post(REST_API_BASE_URL, student) ;
 }
